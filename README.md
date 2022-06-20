@@ -8,8 +8,9 @@ The user is required to specify the range of records to query by entering a mini
 Note: Converting a complex JSON structure with nested objects and arrays to a flat CSV file is not a clean process. In order to do so, compromises are necessary. Therefore, some post-processing will be necessary after CSV files are generated (even for the parsed CSV) for further reuse.
 
 ### Procedure
-This procedure assumes you have python 3.x already installed on your computer and the proper PATH environmental variables are installed.
-1. Clone the GitHub repo to a local folder (Example: C:\HarvestGeolex-main)
+This procedure assumes you have python 3.x already installed on your computer 
+and the proper PATH environmental variables are set.
+1. Clone the GitHub repo or download the zip and extract the contents to a local folder. The examples below assume you cloned or extracted the repo to: C:\HarvestGeolex-main
 2. Open the cmd prompt and navigate to the folder where cloned the Github repo (using example)
 ```console
 C:\>cd C:\HarvestGeolex-main
@@ -24,15 +25,15 @@ C:\HarvestGeolex-main>.\venv\Scripts\activate
 ```
 4. Install packages
 ```console
-(venv) C:\HarvestGeolex-main>>pip install pandas numpy requests argparse
+(venv) C:\HarvestGeolex-main>pip install pandas numpy requests argparse
 ```
 4. Run init.py 
 ```console
-(venv) C:\HarvestGeolex-main>>python init.py
+(venv) C:\HarvestGeolex-main>python init.py
 ```
 5. Run main.py with the leftBound, rightBound, and verbose parameters set (Example: python main.py --leftBound=1000 --rightBound=1010 --verbose=true). Maximum (as of 20220620): 16641  
 ```console
-(venv) C:\HarvestGeolex-main>>python main.py --leftBound=1 --rightBound=10 --verbose=true  
+(venv) C:\HarvestGeolex-main>python main.py --leftBound=1 --rightBound=10 --verbose=true  
 ```
 If successful, the output directory will contain two new timestamped CSV files 
 
