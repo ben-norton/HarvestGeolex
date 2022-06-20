@@ -1,0 +1,10 @@
+prefLabel,age,altLabels,states,lithology,formationId,source
+Aaron,late Precambrian and Early Cambrian(?)*,['Aaron slate (informal)'],"['NC', 'VA']",[],1,https://ngmdb.usgs.gov/connect/apiv1/geolex/units/1/
+Abbott,Early to Middle Pennsylvanian (Morrowan to Atokan),['No current usage. (Rocks of †Abbott Formation of †McCormick Group (IL*) reallocated to Tradewater Formation of Raccoon Creek Group.  See Tradewater.)'],[],"['Sandstone', 'Shale', 'Siltstone', 'Coal']",2,https://ngmdb.usgs.gov/connect/apiv1/geolex/units/2/
+Abel Gap,Devonian(?),['Abel Gap Formation of Talladega Group'],['AL'],[],3,https://ngmdb.usgs.gov/connect/apiv1/geolex/units/3/
+Aberdeen,Late Cretaceous*,['Aberdeen Sandstone Member of Blackhawk Formation of Mesaverde Group'],['UT'],['sandstone'],4,https://ngmdb.usgs.gov/connect/apiv1/geolex/units/4/
+Abingdon,Middle Pennsylvanian (Desmoinesian),['Abingdon Coal Member of Carbondale Formation'],['IL-local'],['Coal'],5,https://ngmdb.usgs.gov/connect/apiv1/geolex/units/5/
+Able,Early Cretaceous (Comanchean Provincial Epoch)*,['Able Member of Lehigh Acres Formation of Glades Group'],['FL-subsurface'],"['Anhydrite', 'Limestone', 'Dolomite']",6,https://ngmdb.usgs.gov/connect/apiv1/geolex/units/6/
+Abrahams Creek,Early Mississippian,['Abrahams Creek Member of Pocono Formation'],['PA'],['Sandstone'],7,https://ngmdb.usgs.gov/connect/apiv1/geolex/units/7/
+Absalona,Late Proterozoic*,['Absalona Formation of Harmony Complex'],['RI'],"['Schist', 'Gneiss']",8,https://ngmdb.usgs.gov/connect/apiv1/geolex/units/8/
+Accomac Canyon,Late Cretaceous (Maastrichtian)*,['Accomac Canyon Alloformation'],"['DE', 'MD', 'NJ']","['Clay', 'Claystone', 'Sandstone']",9,https://ngmdb.usgs.gov/connect/apiv1/geolex/units/9/

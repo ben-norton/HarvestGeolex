@@ -18,9 +18,11 @@ dt = today.strftime("%Y%m%d_%H%M%S")
 parser = argparse.ArgumentParser(description='Enter Range of Formation Identifiers (left - right')
 parser.add_argument('-left', '--leftBound', help='Left (Minimum) Bound', required=True)
 parser.add_argument('-right', '--rightBound', help='Right (Maximum) Record Bound', required=True)
+parser.add_argument('-verbose', '--verbose', help='Verbose script execution using true/false (default false)', required=True, default="false")
 args = parser.parse_args()
 leftBound = args.leftBound
 rightBound = args.rightBound
+verboseoutput = args.verbose.lower().strip()
 requestrange = leftBound + '-' + rightBound
 
 # Set CSV Files
@@ -58,7 +60,8 @@ def get_formations(record):
     formationid = str(record)
 
     url = "https://ngmdb.usgs.gov/connect/apiv1/geolex/units/"+formationid+"/"
-    print('Getting results for ' + url)
+    if verboseoutput == "true":
+        print('Getting results for ' + url)
 
     r = requests.get(url)
     response = r.json()
@@ -96,6 +99,8 @@ def get_formations(record):
 
         # Create results array
         record = [name, age, usages, locations, lithology, formationid, url]
+        if verboseoutput == "true":
+            print(record)
 
         return record
 
@@ -104,7 +109,7 @@ def get_formations(record):
 def create_raw(first, last):
 
     # Clear existing data
-    clear_csv()
+    # clear_csv()
 
     # Setup raw csv file
     data_file = open(rawfile, 'w', newline='')
