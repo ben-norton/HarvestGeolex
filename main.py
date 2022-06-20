@@ -39,19 +39,8 @@ def remove_array_chars():
     with open(rawfile) as file:
         data = file.read().replace(",[\'", ",").replace("\'],", ",").replace("\', \'", ", ").replace("[]", "").replace(",\"[\'",",\"").replace("\']\",","\",")
 
-    with open(parsedfile, "w") as file:
+    with open(parsedfile, "w", encoding='utf-8') as file:
         file.write(data)
-
-
-# Clear data from existing csv files
-def clear_csv():
-
-    f = open(rawfile, "w")
-    f.truncate()
-    f.close()
-    f1 = open(parsedfile, "w")
-    f1.truncate()
-    f1.close()
 
 
 # Get data from API
@@ -112,7 +101,7 @@ def create_raw(first, last):
     # clear_csv()
 
     # Setup raw csv file
-    data_file = open(rawfile, 'w', newline='')
+    data_file = open(rawfile, 'w', newline='', encoding='utf-8')
     writer = csv.writer(data_file)
 
     # Write Header Row
