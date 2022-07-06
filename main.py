@@ -3,6 +3,8 @@ import requests
 import datetime
 import os
 import csv
+import time
+
 
 # Array to hold formation data from geolex
 formations = []
@@ -89,7 +91,10 @@ def create_raw(first, last):
 
     # Write array to file
     for i in range(int(first), int(last) + 1, 1):
+        # pause between iterations to avoid too many requests to the API
+        time.sleep(.25)
         writer.writerow(get_formations(i))
+
     # Close file
     data_file.close()
 
