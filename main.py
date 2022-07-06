@@ -2,7 +2,6 @@ import argparse
 import requests
 import datetime
 import os
-import numpy as np
 import csv
 
 # Array to hold formation data from geolex
@@ -89,8 +88,7 @@ def create_raw(first, last):
     writer.writerow(["prefLabel", "age", "altLabels", "states", "lithology", "formationId", "source"])
 
     # Write array to file
-    for i in np.arange(int(first), int(last), 1):
-        formationlist.append(get_formations(i))
+    for i in range(int(first), int(last) + 1, 1):
         writer.writerow(get_formations(i))
     # Close file
     data_file.close()
