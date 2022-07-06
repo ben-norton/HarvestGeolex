@@ -70,7 +70,7 @@ def get_formations(record):
         age = response['age_description'][0]
 
         for usage in response['usages']:
-            usages = [usage['usage']]
+            usages = usage['usage']
 
         # Create results array
         record = [name, age, usages, locations, lithology, formationid, url]
