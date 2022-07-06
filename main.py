@@ -32,17 +32,6 @@ rawfile = path + '/' + 'raw_' + requestrange + '_' + dt + '.csv'
 parsedfile = path + '/' + 'parsed_' + requestrange + '_' + dt + '.csv'
 
 
-# Create parsed csv file from raw data
-def remove_array_chars():
-
-    data = ""
-    with open(rawfile) as file:
-        data = file.read().replace(",[\'", ",").replace("\'],", ",").replace("\', \'", ", ").replace("[]", "").replace(",\"[\'",",\"").replace("\']\",","\",")
-
-    with open(parsedfile, "w", encoding='utf-8') as file:
-        file.write(data)
-
-
 # Get data from API
 def get_formations(record):
 
@@ -69,13 +58,13 @@ def get_formations(record):
         if len(response['usages']) == 0:
             locations = ""
         else:
-            locations = response['usages'][0]['states']
+            locations = ', '.join(response['usages'][0]['states'])
 
         # First check if json array is empty, then set variable to empty or populate
         if len(response['unit_reference_summaries']) == 0:
             lithology = ""
         else:
-            lithology = response['unit_reference_summaries'][0]['lithology']
+            lithology = ', '.join(response['unit_reference_summaries'][0]['lithology'])
 
         age = response['age_description'][0]
 
@@ -93,7 +82,7 @@ def get_formations(record):
 # Write data returned from request to raw csv file
 def create_raw(first, last):
     # Setup raw csv file
-    data_file = open(rawfile, 'w', newline='', encoding='utf-8')
+    data_file = open(parsedfile, 'w', newline='', encoding='utf-8')
     writer = csv.writer(data_file)
 
     # Write Header Row
@@ -105,9 +94,6 @@ def create_raw(first, last):
         writer.writerow(get_formations(i))
     # Close file
     data_file.close()
-
-    # Create parsed data file from raw data
-    remove_array_chars()
 
 
 # Run Script using User Input
