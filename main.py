@@ -55,10 +55,6 @@ def get_formations(record):
     r = requests.get(url)
     response = r.json()
 
-    locations = []
-    usages = []
-    record = []
-
     # Check if record exists, if not then populate specific results array
     if 'detail' in response:
         record = ['', '', '', '', '', formationid, url]
@@ -96,19 +92,12 @@ def get_formations(record):
 
 # Write data returned from request to raw csv file
 def create_raw(first, last):
-
-    # Clear existing data
-    # clear_csv()
-
     # Setup raw csv file
     data_file = open(rawfile, 'w', newline='', encoding='utf-8')
     writer = csv.writer(data_file)
 
     # Write Header Row
     writer.writerow(["prefLabel", "age", "altLabels", "states", "lithology", "formationId", "source"])
-
-    # Create empty array
-    formationlist = []
 
     # Write array to file
     for i in np.arange(int(first), int(last), 1):
