@@ -2,8 +2,9 @@ import argparse
 import requests
 import datetime
 import os
-import numpy as np
 import csv
+import time
+
 
 # Array to hold formation data from geolex
 formations = []
@@ -32,17 +33,6 @@ rawfile = path + '/' + 'raw_' + requestrange + '_' + dt + '.csv'
 parsedfile = path + '/' + 'parsed_' + requestrange + '_' + dt + '.csv'
 
 
-# Create parsed csv file from raw data
-def remove_array_chars():
-
-    data = ""
-    with open(rawfile) as file:
-        data = file.read().replace(",[\'", ",").replace("\'],", ",").replace("\', \'", ", ").replace("[]", "").replace(",\"[\'",",\"").replace("\']\",","\",")
-
-    with open(parsedfile, "w", encoding='utf-8') as file:
-        file.write(data)
-
-
 # Get data from API
 def get_formations(record):
 
@@ -54,10 +44,6 @@ def get_formations(record):
 
     r = requests.get(url)
     response = r.json()
-
-    locations = []
-    usages = []
-    record = []
 
     # Check if record exists, if not then populate specific results array
     if 'detail' in response:
@@ -73,18 +59,18 @@ def get_formations(record):
         if len(response['usages']) == 0:
             locations = ""
         else:
-            locations = response['usages'][0]['states']
+            locations = ', '.join(response['usages'][0]['states'])
 
         # First check if json array is empty, then set variable to empty or populate
         if len(response['unit_reference_summaries']) == 0:
             lithology = ""
         else:
-            lithology = response['unit_reference_summaries'][0]['lithology']
+            lithology = ', '.join(response['unit_reference_summaries'][0]['lithology'])
 
         age = response['age_description'][0]
 
         for usage in response['usages']:
-            usages = [usage['usage']]
+            usages = usage['usage']
 
         # Create results array
         record = [name, age, usages, locations, lithology, formationid, url]
@@ -96,29 +82,21 @@ def get_formations(record):
 
 # Write data returned from request to raw csv file
 def create_raw(first, last):
-
-    # Clear existing data
-    # clear_csv()
-
     # Setup raw csv file
-    data_file = open(rawfile, 'w', newline='', encoding='utf-8')
+    data_file = open(parsedfile, 'w', newline='', encoding='utf-8')
     writer = csv.writer(data_file)
 
     # Write Header Row
     writer.writerow(["prefLabel", "age", "altLabels", "states", "lithology", "formationId", "source"])
 
-    # Create empty array
-    formationlist = []
-
     # Write array to file
-    for i in np.arange(int(first), int(last), 1):
-        formationlist.append(get_formations(i))
+    for i in range(int(first), int(last) + 1, 1):
+        # pause between iterations to avoid too many requests to the API
+        time.sleep(.25)
         writer.writerow(get_formations(i))
+
     # Close file
     data_file.close()
-
-    # Create parsed data file from raw data
-    remove_array_chars()
 
 
 # Run Script using User Input
